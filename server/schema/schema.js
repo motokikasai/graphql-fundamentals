@@ -11,22 +11,6 @@ const {
   GraphQLList,
 } = graphql;
 
-// dummy data
-// const books = [
-//   { name: 'Famous Book ONE', genre: 'Fantasy', id: '1', authorId: '1' },
-//   { name: 'Famous Book TWO', genre: 'Fantasy', id: '2', authorId: '2' },
-//   { name: 'Famous Book THREE', genre: 'Sci-Fi', id: '3', authorId: '3' },
-//   { name: 'Infamous Book FOUR', genre: 'Fantasy', id: '4', authorId: '2' },
-//   { name: 'Infamous Book FIVE', genre: 'Fantasy', id: '5', authorId: '3' },
-//   { name: 'Infamous Book SIX', genre: 'Sci-Fi', id: '6', authorId: '3' },
-// ];
-
-// const authors = [
-//   { name: 'Patrick', age: 44, id: '1' },
-//   { name: 'Brandon', age: 33, id: '2' },
-//   { name: 'Terry', age: 22, id: '3' },
-// ];
-
 const BookType = new GraphQLObjectType({
   name: 'Book',
   fields: () => ({
@@ -93,6 +77,27 @@ const RootQuery = new GraphQLObjectType({
   },
 });
 
+const Mutation = new GraphQLObjectType({
+  name: 'Mutation',
+  fields: {
+    addAuthor: {
+      type: AuthorType,
+      args: {
+        name: { type: GraphQLString },
+        age: { type: GraphQLInt },
+      },
+      resolve(parent, args) {
+        let author = new Author({
+          name: args.name,
+          age: args.age,
+        });
+        return author.save(); // Mongoose knows how to save data with Schema
+      },
+    },
+  },
+});
+
 module.exports = new GraphQLSchema({
   query: RootQuery,
+  mutation: Mutation,
 });
