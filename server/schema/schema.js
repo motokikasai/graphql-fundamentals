@@ -28,7 +28,8 @@ const authors = [
 const BookType = new GraphQLObjectType({
   name: 'Book',
   fields: () => ({
-    // TYPE RELATIONS
+    // TYPE RELATIONS -> w/o wrapping fn Book/AuthorType will be undefined!
+    // -> NOT YET RUN!
     id: { type: GraphQLID }, // Instead of GraphQLString
     name: { type: GraphQLString },
     genre: { type: GraphQLString },
@@ -75,6 +76,18 @@ const RootQuery = new GraphQLObjectType({
       args: { id: { type: GraphQLID } },
       resolve(parent, args) {
         return _.find(authors, { id: args.id });
+      },
+    },
+    books: {
+      type: new GraphQLList(BookType),
+      resolve(parent, args) {
+        return books;
+      },
+    },
+    authors: {
+      type: new GraphQLList(AuthorType),
+      resolve(parent, args) {
+        return authors;
       },
     },
   },
