@@ -10,14 +10,6 @@ const app = express();
 const URI =
   'mongodb+srv://motokikasai:motokikasai@cluster0.6rxgf.mongodb.net/<dbname>?retryWrites=true&w=majority';
 
-// async () => {
-//   await mongoose.connect(URI, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   });
-//   console.log('Connected to database!');
-// };
-
 mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
   console.log('connected to database!');
