@@ -8,7 +8,7 @@ const app = express();
 
 // connect to MongoDB Atlas
 const URI =
-  'mongodb+srv://motokikasai:motokikasai@cluster0.6rxgf.mongodb.net/<dbname>?retryWrites=true&w=majority';
+  'mongodb+srv://motokikasai:motokikasai@cluster0.6rxgf.mongodb.net/graphqlMongoDB?retryWrites=true&w=majority';
 
 mongoose.connect(URI, { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.once('open', () => {
