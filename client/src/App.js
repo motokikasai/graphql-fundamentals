@@ -1,4 +1,5 @@
 import BookList from './components/BookList';
+import AddBook from './components/AddBook';
 import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const client = new ApolloClient({
@@ -12,6 +13,7 @@ const App = () => {
       <div id='main'>
         <h1>GraphQL APP</h1>
         <BookList />
+        <AddBook />
       </div>
     </ApolloProvider>
   );
